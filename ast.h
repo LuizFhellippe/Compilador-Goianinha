@@ -49,25 +49,21 @@ typedef enum {
 typedef struct AstNode {
     NodeType type;
     int lineno;
-    DataType data_type; // Preenchido pela análise semântica
+    DataType data_type; 
 
-    // Filhos (usado para a maioria dos nós)
     struct AstNode *child1;
     struct AstNode *child2;
     struct AstNode *child3;
 
-    // Valor (para constantes e IDs)
     union {
         int int_val;
         char char_val;
         char* str_val;
     };
 
-    // Ponteiro para o próximo item em uma lista (declarações, comandos, etc.)
     struct AstNode *next; 
 } AstNode;
 
-// Protótipos das funções do construtor da AST
 AstNode* create_node(NodeType type, AstNode *c1, AstNode *c2, AstNode *c3, int lineno);
 AstNode* create_id_node(char* id, int lineno);
 AstNode* create_int_node(int val, int lineno);
@@ -76,6 +72,6 @@ AstNode* create_char_node(char val, int lineno);
 AstNode* append_to_list(AstNode* head, AstNode* newItem);
 
 void free_ast(AstNode *node);
-void print_ast(AstNode *node, int level); // Para depuração
+void print_ast(AstNode *node, int level);
 
 #endif
